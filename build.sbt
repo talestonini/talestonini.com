@@ -44,7 +44,7 @@ lazy val ttDotCom = project
     libraryDependencies ++= Seq(
       // Depend on the scalajs-dom library.
       // It provides static types for the browser DOM APIs.
-      "org.scala-js" %%% "scalajs-dom" % "2.8.0",
+      "org.scala-js" %%% "scalajs-dom" % "2.8.1",
 
       // Depend on Laminar (reactive web application pages and routing)
       "com.raquo" %%% "laminar"  % "17.2.0",
@@ -77,8 +77,8 @@ lazy val ttDotCom = project
     )
   )
 
-  val log4sExclusionRule = ExclusionRule(organization = "org.log4s", name = "log4s_sjs1_3")
-  libraryDependencies := libraryDependencies.value.map(_.excludeAll(log4sExclusionRule))
+val log4sExclusionRule = ExclusionRule(organization = "org.log4s", name = "log4s_sjs1_3")
+libraryDependencies := libraryDependencies.value.map(_.excludeAll(log4sExclusionRule))
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Test setup
