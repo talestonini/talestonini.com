@@ -27,6 +27,7 @@ jobs:
       run: |
         curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs install sbt
         echo "$PATH:/home/runner/.local/share/coursier/bin" >> $GITHUB_PATH
+        sudo apt-get update
         sudo apt-get install libwoff1\
           libvpx9\
           libevent-2.1-7t64\
@@ -79,6 +80,7 @@ jobs:
       run: |
         curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs install sbt
         echo "$PATH:/home/runner/.local/share/coursier/bin" >> $GITHUB_PATH
+        sudo apt-get update
         sudo apt-get install libwoff1\
           libvpx9\
           libevent-2.1-7t64\
