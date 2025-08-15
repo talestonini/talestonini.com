@@ -63,7 +63,7 @@ lazy val ttDotCom = project
       "io.circe"   %%% "circe-parser"    % circeVer,
       "org.http4s" %%% "http4s-circe"    % http4sVer,
       "org.http4s" %%% "http4s-client"   % http4sVer,
-      "org.http4s" %%% "http4s-dom"      % "0.2.11", // this is maintained by Arman Bilge
+      "org.http4s" %%% "http4s-dom"      % "0.2.12", // this is maintained by Arman Bilge
       "io.monix"   %%% "monix-execution" % "3.4.1",
 
       // Java Time for Scala.js
