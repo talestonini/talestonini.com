@@ -195,10 +195,10 @@ trait BasePost {
               case f: Failure[Docs[Comment]] =>
                 println(s"failed getting comments: ${f.exception.getMessage()}")
                 LoadingHr.stop(retrievingComments)
-            })(queue)
+            })(using queue)
         case f: Failure[Doc[Post]] =>
           println(s"failed getting post document name: ${f.exception.getMessage()}")
-      })(queue)
+      })(using queue)
 
   private def persistCommentIntoDb(name: String, comment: String): Unit = {
     Firebase.gaCommentedOn(postDoc.signal.now().fields.resource.getOrElse(""))
@@ -220,7 +220,7 @@ trait BasePost {
           comments.update(cs => s.get +: cs)
         case f: Failure[Doc[Comment]] =>
           println("failed creating comment")
-      })(queue)
+      })(using queue)
   }
 
 }
