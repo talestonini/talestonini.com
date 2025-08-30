@@ -253,7 +253,7 @@ object App {
         case f: Failure[Docs[Post]] =>
           println(s"failed getting posts: ${f.exception.getMessage()}")
           LoadingHr.stop(retrievingPosts)
-      })(queue)
+      })(using queue)
   }
 
 }
