@@ -2,7 +2,7 @@ import org.scalajs.linker.interface.ModuleSplitStyle
 import sbt.internal.util.ManagedLogger
 
 val scalaVer    = "3.7.3" // update prep_public.sh to match this version
-val circeVer    = "0.14.14"
+val circeVer    = "0.14.15"
 val http4sVer   = "0.23.30"
 val javaTimeVer = "2.6.0"
 
