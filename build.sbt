@@ -72,7 +72,7 @@ lazy val ttDotCom = project
 
       // Testing framework
       "org.scalameta" %%% "munit"             % "1.2.1"         % Test,
-      "org.scalatest" %%% "scalatest"         % "3.3.0-alpha.1" % Test,
+      "org.scalatest" %%% "scalatest"         % "3.3.0-alpha.2" % Test,
       "org.typelevel" %%% "munit-cats-effect" % "2.1.0"         % Test
     )
   )
