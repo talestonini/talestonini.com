@@ -84,7 +84,7 @@ object CloudFirestore extends Database[IO] {
     if (isBadRequest(model.content)) {
       IO.raiseError(new Exception(s"bad request")) // anti hack protection
     } else {
-      val uri = toFirestoreUri(path).withQueryParam("updateMask.fieldPaths", model.dbFields)
+      val uri     = toFirestoreUri(path).withQueryParam("updateMask.fieldPaths", model.dbFields)
       val request = Request[IO](Method.PATCH, uri)
         .withEntity[Json](Body(path, model).asJson)
         .withHeaders(Header.Raw(CIString("Authorization"), s"Bearer $token"))
@@ -97,7 +97,7 @@ object CloudFirestore extends Database[IO] {
   def deleteDocument[T <: Model](token: String, path: String)(
     implicit docDecoder: Decoder[Doc[T]]
   ): IO[Option[Throwable]] = {
-    val uri = toFirestoreUri(path)
+    val uri     = toFirestoreUri(path)
     val request = Request[IO](method = Method.DELETE, uri = uri)
       .withHeaders(Header.Raw(CIString("Authorization"), s"Bearer $token"))
 
