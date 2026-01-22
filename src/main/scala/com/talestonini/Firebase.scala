@@ -7,7 +7,7 @@ import js.JSConverters.JSRichMap
 object Firebase {
 
   @js.native @JSImport("firebase/app", "initializeApp")
-  def initializeApp(firebaseConfig: js.Dictionary[String]): js.Object = js.native
+  private def initializeApp(firebaseConfig: js.Dictionary[String]): js.Object = js.native
   // Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,10 +30,10 @@ object Firebase {
   // --- analytics -----------------------------------------------------------------------------------------------------
 
   @js.native @JSImport("firebase/analytics", "getAnalytics")
-  def getAnalytics(app: js.Object): js.Object = js.native
+  private def getAnalytics(app: js.Object): js.Object = js.native
 
   @js.native @JSImport("firebase/analytics", "logEvent")
-  def logEvent(analytics: js.Object, eventName: String, event: js.Dictionary[Any]): Unit = js.native
+  private def logEvent(analytics: js.Object, eventName: String, event: js.Dictionary[Any]): Unit = js.native
 
   // Initialize Analytics and get a reference to the service
   private val analytics = getAnalytics(app)

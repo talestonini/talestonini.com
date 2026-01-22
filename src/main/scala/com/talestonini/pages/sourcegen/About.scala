@@ -1,9 +1,10 @@
-/** *************************************************************************************************
-  *
-  * THIS CODE IS GENERATED AT COMPILE TIME BY LAIKA SBT PLUGIN.
-  *
-  * Do not modify it directly, as compilation will ovewrite your modifications.
-  */
+/***************************************************************************************************
+ *
+ * THIS CODE IS GENERATED AT COMPILE TIME BY LAIKA SBT PLUGIN.
+ *
+ * Do not modify it directly, as compilation will ovewrite your modifications.
+ *
+ **************************************************************************************************/
 package com.talestonini.pages.sourcegen
 
 import com.raquo.laminar.api.L.{*, given}
@@ -27,7 +28,7 @@ object About {
             <td style="padding-right: 15px; width: 30%;"><img src="/img/talestonini.jpg"/></td>
             <td>
               <p>Hi!, my name is <strong>Tales Tonini</strong>. I&#39;m a software engineer interested in Functional Programming, Distributed Systems and the Scala language.</p>
-              <p>For the past 6 years I&#39;ve been working at <a href="https://mantelgroup.com.au/">Mantel Group</a> delivering backend API&#39;s and client applications for Spark and Kafka, platforms that I really enjoy to program in. I&#39;ve also extensive experience programming in Java and other JVM languages like Kotlin and Groovy.</p>
+              <p>For the past 7 years I&#39;ve been working at <a href="https://mantelgroup.com.au/">Mantel</a> delivering backend API&#39;s and client applications for Spark and Kafka, platforms that I really enjoy to program in. I&#39;ve also extensive experience programming in Java and other JVM languages like Kotlin and Groovy.</p>
             </td>
           </tr>
           <tr>
@@ -45,7 +46,7 @@ object About {
           </tr>
           <tr>
             <td colspan="2">
-              <p>For the past 6 years I&#39;ve been working at <a href="https://mantelgroup.com.au/">Mantel Group</a> delivering backend API&#39;s and client applications for Spark and Kafka, platforms that I really enjoy to program in. I&#39;ve also extensive experience programming in Java and other JVM languages like Kotlin and Groovy.</p>
+              <p>For the past 7 years I&#39;ve been working at <a href="https://mantelgroup.com.au/">Mantel</a> delivering backend API&#39;s and client applications for Spark and Kafka, platforms that I really enjoy to program in. I&#39;ve also extensive experience programming in Java and other JVM languages like Kotlin and Groovy.</p>
               <p>I live in Melbourne, Australia, but am originally from Brazil. Aside from programming, I like to spend time with family and friends, swimming and the outdoors.</p>
             </td>
           </tr>

@@ -128,7 +128,7 @@ object App {
       })).bind(el)
   }
 
-  def navigateByPostResource(resource: String) =
+  def navigateByPostResource(resource: String): Binder[HtmlElement] =
     navigateTo(postMap(resource).page)
 
   // --- private -------------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ object App {
     else
       Route.static(
         page,
-        root / pagePathMap.get(page).getOrElse(s"missing page path building route for page $page") / endOfSegments,
+        root / pagePathMap.getOrElse(page, s"missing page path building route for page $page") / endOfSegments,
         basePath = Route.fragmentBasePath
       )
 
@@ -197,7 +197,7 @@ object App {
   )
 
   private def render(page: Page): Element = {
-    Firebase.gaViewing(pagePathMap.get(page).getOrElse(throw new Exception(s"missing page path rendering page $page")))
+    Firebase.gaViewing(pagePathMap.getOrElse(page, throw new Exception(s"missing page path rendering page $page")))
     Prism.prismHighlightAll() // in lieu of '<body onhashchange=...' as Waypoint does not trigger the hashchange event
     scrollToTop()             // without this, new page is rendered and scrolled to the position of the previous page
     pageElement(page)
@@ -239,11 +239,7 @@ object App {
               Posts.posts.update(data => data :+ postDoc)
 
             // to build each post page
-            postMap
-              .get(resource)
-              .getOrElse(
-                throw new Exception(s"missing entry in postsMap for $resource")
-              )
+            postMap.getOrElse(resource, throw new Exception(s"missing entry in postsMap for $resource"))
               .promise success postDoc // fulfills the post promise
 
             allTags = allTags ++ postDoc.fields.tags.get.map(t => t.tag).toSet
