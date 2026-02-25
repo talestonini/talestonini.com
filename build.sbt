@@ -15,9 +15,10 @@ lazy val ttDotCom = project
     scalacOptions ++= Seq(
       "-deprecation", // emit warning and location for usages of deprecated APIs
       "-feature",     // emit warning and location for usages of features that should be imported explicitly
-      "-unchecked"    // enable additional warnings where generated code depends on assumptions
+      "-unchecked",   // enable additional warnings where generated code depends on assumptions
+      "-language:implicitConversions"
     ),
-    version := "1.3.7",
+    version := "1.3.8",
 
     // Tell Scala.js that this is an application with a main method
     scalaJSUseMainModuleInitializer := true,
