@@ -15,8 +15,7 @@ lazy val ttDotCom = project
     scalacOptions ++= Seq(
       "-deprecation", // emit warning and location for usages of deprecated APIs
       "-feature",     // emit warning and location for usages of features that should be imported explicitly
-      "-unchecked",   // enable additional warnings where generated code depends on assumptions
-      "-language:implicitConversions"
+      "-unchecked"    // enable additional warnings where generated code depends on assumptions
     ),
     version := "1.3.8",
 
