@@ -18,11 +18,11 @@ package object observer {
   }
 
   abstract class SimpleObservable extends Observable {
-    var observers: Map[EventName, Seq[Observer]] = Map.empty
+    private var observers: Map[EventName, Seq[Observer]] = Map.empty
 
     def register(o: Observer, es: EventName*): Unit =
       for (e <- es) {
-        var os = observers.get(e).getOrElse(Seq.empty)
+        val os = observers.get(e).getOrElse(Seq.empty)
         if (os.isEmpty)
           observers = observers + (e -> Seq(o))
         else
