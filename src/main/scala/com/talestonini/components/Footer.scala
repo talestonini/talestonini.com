@@ -21,9 +21,9 @@ object Footer {
 
   private def iconAnchor(iconHref: String, iconClass: String, eventTarget: String): Element =
     a(
-      href      := iconHref,
-      className := "footer-icon",
-      target    := "_blank",
+      href        := iconHref,
+      className   := "footer-icon",
+      target      := "_blank",
       i(className := s"fa $iconClass w3-hover-opacity"),
       onClick --> Firebase.gaClickedFooter(eventTarget)
     )
