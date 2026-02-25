@@ -1,7 +1,7 @@
 import org.scalajs.linker.interface.ModuleSplitStyle
 import sbt.internal.util.ManagedLogger
 
-val scalaVer    = "3.7.4" // update prep_public.sh to match this version
+val scalaVer    = "3.8.1" // update prep_public.sh to match this version
 val circeVer    = "0.14.15"
 val http4sVer   = "0.23.33"
 val javaTimeVer = "2.6.0"
@@ -71,7 +71,7 @@ lazy val ttDotCom = project
       "io.github.cquiroz" %%% "scala-java-time-tzdb" % javaTimeVer,
 
       // Testing framework
-      "org.scalameta" %%% "munit"             % "1.2.1"         % Test,
+      "org.scalameta" %%% "munit"             % "1.2.2"         % Test,
       "org.scalatest" %%% "scalatest"         % "3.3.0-alpha.2" % Test,
       "org.typelevel" %%% "munit-cats-effect" % "2.1.0"         % Test
     )

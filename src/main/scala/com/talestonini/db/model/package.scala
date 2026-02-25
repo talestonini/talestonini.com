@@ -37,15 +37,12 @@ package object model {
 
   implicit def docDecoder[T <: Model](implicit fieldsDecoder: Decoder[T]): Decoder[Doc[T]] =
     // name, fields, createTime and updateTime are part of Cloud Firestore specs
-    new Decoder[Doc[T]] {
-      final def apply(c: HCursor): Decoder.Result[Doc[T]] =
-        for {
-          name       <- c.get[String]("name")
-          fields     <- c.get[T]("fields")
-          createTime <- c.get[String]("createTime")
-          updateTime <- c.get[String]("updateTime")
-        } yield Doc(name, fields, createTime, updateTime)
-    }
+    (c: HCursor) => for {
+      name <- c.get[String]("name")
+      fields <- c.get[T]("fields")
+      createTime <- c.get[String]("createTime")
+      updateTime <- c.get[String]("updateTime")
+    } yield Doc(name, fields, createTime, updateTime)
 
   type Docs[T] = Seq[Doc[T]]
   case class DocsRes[T](documents: Docs[T])
