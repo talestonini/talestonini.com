@@ -42,7 +42,8 @@ jobs:
           libhyphen0\
           libmanette-0.2-0\
           libgles2\
-          gstreamer1.0-libav
+          gstreamer1.0-libav\
+          libwayland-server0
 
     - name: Create project secret files
       env:
@@ -95,7 +96,8 @@ jobs:
           libhyphen0\
           libmanette-0.2-0\
           libgles2\
-          gstreamer1.0-libav
+          gstreamer1.0-libav\
+          libwayland-server0
 
     - name: Create project secret files
       env:
