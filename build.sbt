@@ -71,7 +71,7 @@ lazy val ttDotCom = project
       "io.github.cquiroz" %%% "scala-java-time-tzdb" % javaTimeVer,
 
       // Testing framework
-      "org.scalameta" %%% "munit"             % "1.2.4"         % Test,
+      "org.scalameta" %%% "munit"             % "1.3.0"         % Test,
       "org.scalatest" %%% "scalatest"         % "3.3.0-alpha.2" % Test,
       "org.typelevel" %%% "munit-cats-effect" % "2.2.0"         % Test
     )
