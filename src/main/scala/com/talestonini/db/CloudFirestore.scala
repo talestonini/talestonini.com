@@ -1,6 +1,6 @@
 package com.talestonini.db
 
-import cats.effect.IO
+import cats.effect.{IO, Temporal}
 import com.talestonini.db.model._
 import com.talestonini.utils.randomAlphaNumericString
 import io.circe._
@@ -13,6 +13,7 @@ import org.http4s.implicits._
 import org.http4s.{Uri, UriTemplate}
 import org.http4s.UriTemplate._
 import org.typelevel.ci._
+import scala.concurrent.duration._
 
 object CloudFirestore extends Database[IO] {
 
@@ -56,13 +57,27 @@ object CloudFirestore extends Database[IO] {
   // -------------------------------------------------------------------------------------------------------------------
 
   def getAuthToken(): IO[String] = {
-    val uri     = uri"https://identitytoolkit.googleapis.com/v1/accounts:signUp".withQueryParam("key", ApiKey)
-    val request = Request[IO](Method.POST, uri).withHeaders(Headers(Header.Raw(ci"Content-Type", "application/json")))
-
-    FetchClientBuilder[IO].create
-      .expectOr[AuthTokenResponse](request)(errorResponse =>
-        IO(CloudFirestoreException(s"failed requesting signUp token: $errorResponse")))
-      .map(response => response.idToken)
+    def attempt(retriesLeft: Int): IO[String] = {
+      val uri     = uri"https://identitytoolkit.googleapis.com/v1/accounts:signUp".withQueryParam("key", ApiKey)
+      val request = Request[IO](Method.POST, uri).withHeaders(Headers(Header.Raw(ci"Content-Type", "application/json")))
+  
+      FetchClientBuilder[IO].create
+        .expectOr[AuthTokenResponse](request)(errorResponse =>
+          IO(CloudFirestoreException(s"failed requesting signUp token: $errorResponse")))
+        .map(response => response.idToken)
+        .recoverWith {
+          case e if retriesLeft > 0 && e.getMessage.contains("400") =>
+            val backoff = (3 - retriesLeft) match {
+              case 0 => 1.second
+              case 1 => 2.seconds
+              case _ => 4.seconds
+            }
+            IO.sleep(backoff) >> attempt(retriesLeft - 1)
+          case e => IO.raiseError(e)
+        }
+    }
+  
+    attempt(3)
   }
 
   def getDocuments[T <: Model](token: String, path: String)(
