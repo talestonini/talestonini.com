@@ -20,7 +20,7 @@ object Posts {
       for {
         post <- ps
         fields = post.fields
-        if fields.tags.map(tags => filter.toSet.subsetOf(tags.toSet)).getOrElse(true)
+        if fields.tags.forall(tags => filter.toSet.subsetOf(tags.toSet))
       } yield div(
         p(
           div(

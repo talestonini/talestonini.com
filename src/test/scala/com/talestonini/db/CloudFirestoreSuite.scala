@@ -41,7 +41,7 @@ class CloudFirestoreSuite extends CatsEffectSuite {
 
     CloudFirestore.upsertDocument[Comment](getTestToken(), niceCommentPath, niceComment) flatMap { comment =>
       IO(assertEquals(comment.fields.author, niceComment.author))
-      IO(assertEquals(comment.fields.date.toString(), niceComment.date.toString().substring(0, 23)))
+      IO(assertEquals(comment.fields.date.toString, niceComment.date.toString.substring(0, 23)))
       IO(assertEquals(comment.fields.text, niceComment.text))
     }
   }
@@ -50,7 +50,7 @@ class CloudFirestoreSuite extends CatsEffectSuite {
     CloudFirestore.getDocuments[Comment](getTestToken(), unitTestCommentsPath) flatMap { comments =>
       val filteredComments = comments.filter(c => c.fields.author.get.name.get == "Heather Miller")
       IO(assertEquals(filteredComments.size, 1))
-      val theNiceComment = filteredComments(0)
+      val theNiceComment = filteredComments.head
       IO(assertEquals(theNiceComment.name, niceCommentPath))
     }
   }

@@ -24,7 +24,7 @@ trait BasePost {
 
   // promise for the post document backing this page
   // (public, because the App fulfills it when it retrieves posts data from the database)
-  val postDocPromise = Promise[Doc[Post]]()
+  val postDocPromise: Promise[Doc[Post]] = Promise[Doc[Post]]()
   setupPostDocPromise() // must be setup from object creation, so that comments are retrieved asap from database
 
   // the post document backing this post page

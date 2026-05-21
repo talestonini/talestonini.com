@@ -66,7 +66,7 @@ object CloudFirestore extends Database[IO] {
   }
 
   def getDocuments[T <: Model](token: String, path: String)(
-    implicit docsResDecoder: Decoder[DocsRes[T]]
+    using docsResDecoder: Decoder[DocsRes[T]]
   ): IO[Docs[T]] = {
     val uri     = toFirestoreUri(path)
     val request = Request[IO](Method.GET, uri).withHeaders(Header.Raw(CIString("Authorization"), s"Bearer $token"))
@@ -78,7 +78,7 @@ object CloudFirestore extends Database[IO] {
   }
 
   def upsertDocument[T <: Model](token: String, path: String, model: T)(
-    implicit docDecoder: Decoder[Doc[T]],
+    using docDecoder: Decoder[Doc[T]],
     bodyEncoder: Encoder[Body[T]]
   ): IO[Doc[T]] =
     if (isBadRequest(model.content)) {
@@ -95,7 +95,7 @@ object CloudFirestore extends Database[IO] {
     }
 
   def deleteDocument[T <: Model](token: String, path: String)(
-    implicit docDecoder: Decoder[Doc[T]]
+    using docDecoder: Decoder[Doc[T]]
   ): IO[Option[Throwable]] = {
     val uri     = toFirestoreUri(path)
     val request = Request[IO](method = Method.DELETE, uri = uri)

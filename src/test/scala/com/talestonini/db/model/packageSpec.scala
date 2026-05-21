@@ -6,6 +6,7 @@ import org.http4s.circe.jsonEncoderOf
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AsyncWordSpec
+import scala.language.implicitConversions
 
 class packageSpec extends AsyncWordSpec with Matchers {
 

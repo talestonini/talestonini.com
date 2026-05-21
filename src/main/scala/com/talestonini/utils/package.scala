@@ -36,7 +36,7 @@ package object utils {
 
   private val UTCZoneId = ZoneId.of("UTC")
 
-  val InitDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0), UTCZoneId)
+  val InitDateTime: ZonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0), UTCZoneId)
 
   val SimpleDateFormatter      = pattern("dd LLL yyyy")
   val DateTimeCompareFormatter = pattern("yyyyMMddhhmmss")
