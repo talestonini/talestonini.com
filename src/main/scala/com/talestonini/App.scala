@@ -239,7 +239,8 @@ object App {
               Posts.posts.update(data => data :+ postDoc)
 
             // to build each post page
-            postMap.getOrElse(resource, throw new Exception(s"missing entry in postsMap for $resource"))
+            postMap
+              .getOrElse(resource, throw new Exception(s"missing entry in postsMap for $resource"))
               .promise success postDoc // fulfills the post promise
 
             allTags = allTags ++ postDoc.fields.tags.get.map(t => t.tag).toSet
