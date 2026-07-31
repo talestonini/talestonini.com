@@ -60,7 +60,7 @@ object CloudFirestore extends Database[IO] {
     def attempt(retriesLeft: Int): IO[String] = {
       val uri     = uri"https://identitytoolkit.googleapis.com/v1/accounts:signUp".withQueryParam("key", ApiKey)
       val request = Request[IO](Method.POST, uri).withHeaders(Headers(Header.Raw(ci"Content-Type", "application/json")))
-  
+
       FetchClientBuilder[IO].create
         .expectOr[AuthTokenResponse](request)(errorResponse =>
           IO(CloudFirestoreException(s"failed requesting signUp token: $errorResponse")))
@@ -76,7 +76,7 @@ object CloudFirestore extends Database[IO] {
           case e => IO.raiseError(e)
         }
     }
-  
+
     attempt(3)
   }
 
