@@ -1,5 +1,7 @@
 import org.scalajs.linker.interface.ModuleSplitStyle
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt.internal.util.ManagedLogger
+
 
 val scalaVer    = "3.8.4" // update prep_public.sh to match this version
 val circeVer    = "0.14.16"
@@ -9,7 +11,7 @@ val javaTimeVer = "2.7.0"
 lazy val ttDotCom = project
   .in(file("."))
   .enablePlugins(ScalaJSPlugin) // Enable the Scala.js plugin in this project
-  .enablePlugins(BuildInfoPlugin, LaikaPlugin)
+  .enablePlugins(BuildInfoPlugin)
   .settings(
     scalaVersion := s"$scalaVer",
     scalacOptions ++= Seq(
@@ -137,7 +139,7 @@ replaceProdSecrets := {
 
 def replaceString(log: ManagedLogger, dir: File, fileFilter: String, from: String, to: String) = {
   val toReplace        = s"@$from@"
-  val files: Seq[File] = Option.apply((dir ** fileFilter).get).getOrElse(Seq.empty[File])
+  val files: Seq[File] = Option.apply((dir ** fileFilter).get()).getOrElse(Seq.empty[File])
   log.info(s"* ${files.size} files to check for secret $from")
   files.foreach { f =>
     val content = IO.read(f)
@@ -178,33 +180,8 @@ fullLinkJS := (Def.taskDyn {
 }).value
 
 // ---------------------------------------------------------------------------------------------------------------------
-// LaikaPlugin setup
-// Tasks to generate scala classes from MarkDown pages
+// Laika setup
+// laikaPrep task (defined in laika.sbt) generates scala classes from MarkDown pages
 // ---------------------------------------------------------------------------------------------------------------------
-Laika / sourceDirectories := Seq(sourceDirectory.value / "main/resources/pages")
-laikaSite / target        := sourceDirectory.value / "main/scala/com/talestonini/pages/sourcegen"
-laikaTheme                := laika.theme.Theme.empty
-laikaExtensions           := Seq(laika.format.Markdown.GitHubFlavor)
-laikaConfig               := LaikaConfig.defaults.withRawContent
-
-lazy val laikaHTML2Scala = taskKey[Unit]("Renames Laika's .html outputs to .scala")
-laikaHTML2Scala := {
-  renameHtmlToScala(sourceDirectory.value / "main/scala/com/talestonini/pages/sourcegen")
-  renameHtmlToScala(sourceDirectory.value / "main/scala/com/talestonini/pages/sourcegen/posts")
-}
-
-def renameHtmlToScala(dir: File) = {
-  file(dir.getAbsolutePath)
-    .listFiles()
-    .map(f => {
-      val filename = f.getAbsolutePath()
-      if (filename.endsWith("html")) {
-        val prefix = filename.substring(0, filename.lastIndexOf("."))
-        f.renameTo(new File(prefix + ".scala"))
-      }
-    })
-}
-
-lazy val laikaPrep = taskKey[Unit]("Runs all Laika-related tasks at once")
-laikaPrep         := Def.sequential(laikaHTML, laikaHTML2Scala).value
 Compile / compile := ((Compile / compile) dependsOn laikaPrep).value
+
