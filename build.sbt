@@ -1,7 +1,7 @@
 import org.scalajs.linker.interface.ModuleSplitStyle
 import sbt.internal.util.ManagedLogger
 
-val scalaVer    = "3.8.4" // update prep_public.sh to match this version
+val scalaVer    = "3.9.0" // update prep_public.sh to match this version
 val circeVer    = "0.14.16"
 val http4sVer   = "0.23.36"
 val javaTimeVer = "2.7.0"
@@ -64,14 +64,14 @@ lazy val ttDotCom = project
       "org.http4s" %%% "http4s-circe"    % http4sVer,
       "org.http4s" %%% "http4s-client"   % http4sVer,
       "org.http4s" %%% "http4s-dom"      % "0.2.12", // this is maintained by Arman Bilge
-      "io.monix"   %%% "monix-execution" % "3.4.1",
+      "io.monix"   %%% "monix-execution" % "3.5.0",
 
       // Java Time for Scala.js
       "io.github.cquiroz" %%% "scala-java-time"      % javaTimeVer,
       "io.github.cquiroz" %%% "scala-java-time-tzdb" % javaTimeVer,
 
       // Testing framework
-      "org.scalameta" %%% "munit"             % "1.3.4"         % Test,
+      "org.scalameta" %%% "munit"             % "1.3.6"         % Test,
       "org.scalatest" %%% "scalatest"         % "3.3.0-alpha.2" % Test,
       "org.typelevel" %%% "munit-cats-effect" % "2.2.0"         % Test
     )
