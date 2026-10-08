@@ -3,5 +3,5 @@ libraryDependencies += "org.scala-js"          %% "scalajs-env-selenium"    % "1
 libraryDependencies += "io.github.gmkumar2005" %% "scala-js-env-playwright" % "0.1.18"
 
 addSbtPlugin("org.scala-js"  % "sbt-scalajs"   % "1.22.0")
-addSbtPlugin("com.eed3si9n"  % "sbt-buildinfo" % "0.13.1")
+addSbtPlugin("com.eed3si9n"  % "sbt-buildinfo" % "0.13.2")
 addSbtPlugin("org.typelevel" % "laika-sbt"     % "1.3.2")
