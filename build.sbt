@@ -4,7 +4,7 @@ import sbt.internal.util.ManagedLogger
 val scalaVer    = "3.9.0" // update prep_public.sh to match this version
 val circeVer    = "0.14.16"
 val http4sVer   = "0.23.38"
-val javaTimeVer = "2.7.0"
+val javaTimeVer = "2.8.0"
 
 lazy val ttDotCom = project
   .in(file("."))
